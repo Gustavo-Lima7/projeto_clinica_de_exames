@@ -1,33 +1,83 @@
 import random
-exames = {
-    "1": {"nome": "Hemograma"},
-    "2": {"nome": "Glicemia"},
-    "3": {"nome": "Colesterol"},
-    "4": {"nome": "Triglicerídeos"},
-    "5": {"nome": "Urina"}
-}
-print("Olá, seja vem vindo(a) à clínica!\nPor favor preencha com seus dados para continuarmos!")
-nome = input("Seu nome: ")
+from time import sleep
+
 while True:
-    cpf = input("Digite seu CPF (somente números, por favor): ")
-    if cpf.isdigit():
-        break
-    else:
-        print("Digite somente números sem, sem pontuação ou traços, por favor")
-while True:
+    print("===" * 13)
+    print("SEJA BEM VINDO(A) A CLÍNICA DE EXAMES!")
+    print("===" * 13)
+    exames = {
+        "1": {"nome": "Hemograma"},
+        "2": {"nome": "Glicemia"},
+        "3": {"nome": "Colesterol"},
+        "4": {"nome": "Triglicerídeos"},
+        "5": {"nome": "Urina"}
+    }
+    print("\nOlá, seja vem vindo(a) à clínica!\nPor favor preencha com seus dados para continuarmos!\n")
+    print("===" * 13)
+    nome = input("Seu nome: ")
+    
     nmr = input("Seu número de telefone: ")
+    
     if nmr.isdigit():
+        pass
+    else:
+        print("Digite somente números por favor!\n")
+        nmr = input("Seu número de telefone: ")
+
+    print("===" * 13)
+    print("Obrigado! Seu cadastro já está feito!")
+    print("===" * 13)
+
+    print("\nEstamos processando seus dados...\n")
+    sleep(2)
+
+    senha = random.randint(100, 999)
+
+    print("===" * 14)
+    print("Perfeito! Esses são os exames disponíveis:")
+    print("===" * 14)
+
+    print("1 - Hemograma")
+    print("2 - Glicemia")
+    print("3 - Colesterol")
+    print("4 - Triglicerídeos")
+    print("5 - Urina")
+    print("===" * 17)
+    escolha_exame = input("Agora selecione o exame que deseja realizar!:")
+    print("===" * 17)
+    print("\nProcessando sua escolha...\n")
+
+    sleep(2)
+
+    exame_selecionado = exames.get(escolha_exame)
+    
+    if escolha_exame in exames:
+        print("---" * 35)
+        print(f"{nome} você selecionou o exame: {exame_selecionado['nome']}. Sua senha é {senha}. Obrigado por escolher nossa clínica!")
+        print("---" * 35)
         break
     else:
-        print("Digite somente números por favor")
-print("Obrigado! Seu cadastro já está feito!")
-senha = random.randint(100, 999)
-escolha_exame = input("Agora selecione o exame que deseja realizar!\n1 - Hemograma\n2 - Glicemia\n3 - Colesterol\n4 - Triglicerídeos\n5 - Urina\nDigite aqui o número do exame: ")
-while True:
-   exame_selecionado = exames.get(escolha_exame)
-   if escolha_exame in exames:
-    print(f"{nome} você selecionou o exame: {exame_selecionado['nome']}. Sua senha é {senha}. Obrigado por escolher nossa clínica!")
-    break
-   else: 
-       print("Opção inválida, por favor digite o número do exame selecionado: ")
-       escolha_exame = input("1 - Hemograma\n2 - Glicemia\n3 - Colesterol\n4 - Triglicerídeos\n5 - Urina\nDigite aqui o número do exame: ")
+        print("===" * 21)
+        print("Opção inválida, por favor digite o número do exame selecionado:")
+        print("===" * 21)
+        
+        print("1 - Hemograma")
+        print("2 - Glicemia")
+        print("3 - Colesterol")
+        print("4 - Triglicerídeos")
+        print("5 - Urina")
+        
+        print("===" * 11)
+
+        escolha_exame = input("Digite aqui o número do exame: ")
+        
+        print("===" * 11)
+        
+        print("\nProcessando sua escolha...\n")
+        sleep(2)
+        
+        exame_selecionado = exames.get(escolha_exame)
+        print("===" * 33)
+        print(f"{nome} você selecionou o exame: {exame_selecionado['nome']}. Sua senha é {senha}. Obrigado por escolher nossa clínica!")
+        print("===" * 33)
+        break
