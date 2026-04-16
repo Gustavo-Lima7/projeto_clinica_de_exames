@@ -1,0 +1,204 @@
+import random
+from colorama import Fore, Style #Biblioteca de cores para o terminal para colorir/personalizar o terminal.
+from time import sleep #Biblioteca para colocar pausa em algumas strings.
+
+#while True:
+    
+print(Fore.YELLOW + "\nINICIANDO...\n")
+#sleep(3)#Uma "brincadeira" para adicionar um tempinho fingindo que a clínica está iniciando.
+
+while True:
+    print(Fore.WHITE + "===" * 13)
+    print("SEJA BEM VINDO(A) A " + Fore.RED + Style.BRIGHT + "CLÍNICA DE EXAMES!" + Style.RESET_ALL + Fore.WHITE)
+    print("===" * 13)
+
+#faz o design da clínica, imprimindo uma mensagem de boas-vindas e separando em  linhas.
+
+    print("Olá, seja vem vindo(a) à clínica!\nPor favor preencha com seus dados para continuarmos!\n")
+    
+    nome = input("Digite seu " + Fore.GREEN + "nome: " + Fore.YELLOW)
+    email = input(Fore.WHITE + "Digite seu " + Fore.GREEN + "email: " + Fore.YELLOW)
+    nmr = input(Fore.WHITE + "Seu número de " + Fore.GREEN + "telefone: " + Fore.YELLOW)
+
+    if nmr.isdigit():
+        pass
+    else:
+        print(Fore.RED + Style.BRIGHT + "[ERRO]" + Fore.WHITE + " Digite somente " + Fore.GREEN + "números por favor!" + Fore.WHITE + "\n")
+        nmr = input("Digite seu número de " + Fore.GREEN + "telefone: " + Fore.YELLOW)
+        
+        #verifica se o número de telefone contém apenas dígitos. Se não, exibe uma mensagem de erro e pede para o usuário tentar novamente.
+
+    print(" ")
+    print(Fore.WHITE + Style.BRIGHT + "===" * 13)
+    print("\n" + Fore.LIGHTMAGENTA_EX + Style.BRIGHT + "Estamos processando seus dados. Por favo aguarde...\n")
+    sleep
+    print(Fore.WHITE + Style.BRIGHT + "===" * 13)
+
+    print("\n" + Fore.GREEN + "Obrigado! Seu cadastro já está feito!" + Fore.WHITE + "\n")
+    
+    poa = input('Deseja ' + Fore.GREEN + 'agendar' + Fore.WHITE + ' ou ' + Fore.YELLOW + 'realizarum exame presencial?' + Fore.WHITE + '(A/R):\n').capitalize()
+    print('')
+    if poa.capitalize() == "a" or poa.capitalize() == "agendar":
+            print('')
+    else:
+         print('Nos dias disponíveis digite Realizar ou R para realizar um exame precencialmente.')
+
+    print('\nDias disponíveis:\n')
+    print('1.' + Fore.LIGHTGREEN_EX + 'Segunda' + Fore.WHITE)
+    print('2.' + Fore.CYAN + 'Terça' + Fore.WHITE)
+    print('3.' + Fore.LIGHTGREEN_EX + 'Quarta' + Fore.WHITE)
+    print('4.' + Fore.CYAN + 'Quinta' + Fore.WHITE)
+    print('5.' + Fore.LIGHTGREEN_EX + 'Sexta\n' + Fore.WHITE)
+
+    dias =  {
+            'seg' or 'segunda' : 'segunda',
+            'ter' or 'terca' : 'terça',
+            'qua' or 'quarta' : 'quarta',
+            'qui' or 'quinta' : 'quinta',
+            'sex' or 'sexta' : 'sexta'
+        }
+        
+    print('Esses são os dias disponíveis para agendamento:\n')
+    dia = input('Digite o nome do dia que deseja agendar. Exemplo(Segunda/seg): ').strip().lower()
+    if dia == 'seg' or dia == 'segunda':
+            conf = input(f'Você selecionou '+ Fore.RED + Style.DIM + f'{dia}' + Fore.WHITE + Style.NORMAL + ' deseja confirmar o dia? (S/N): ')
+            
+            if conf == 's' or conf == 'sim':
+                
+                print(Fore.YELLOW + '\nCONFIRMANDO DIA...' + Fore.WHITE)
+                sleep(2)
+                print('\nEsses são os horários disponíveis para segunda:\n')
+                print('13:00\n')
+                print('17:00\n')
+                hor = input('Digite o horário que deseja agendar: \n')
+       
+    elif dia == 'ter' or dia == 'terca':
+            conf = input(f'Você selecionou ' + Fore.RED + Style.DIM + f'{dia}' + Fore.WHITE + Style.NORMAL + ' deseja confirmar o dia? (S/N): ')
+            if conf == 's' or conf == 'sim':
+                
+                print(Fore.YELLOW + 'CONFIRMANDO DIA...')
+                sleep(2)
+                print('Esses são os horários disponíveis para terça:\n')
+                print('09:00\n')
+                print('15:00\n')
+                hor = input('Digite o horário que deseja agendar: \n')
+
+    elif dia == 'quar' or dia == 'quarta':
+            conf = input('Você selecionou ' + Fore.RED + Style.DIM + f'{dia}' + Fore.WHITE + ' deseja confirmar o dia? (S/N): ')
+            if conf == 's' or conf == 'sim':
+                
+                print(Fore.YELLOW + 'CONFIRMANDO DIA...')
+                sleep(2)
+                print('Esses são os horários disponíveis para quarta:\n')
+                print('10:00\n')
+                print('14:00\n')
+                hor = input('Digite o horário que deseja agendar: \n')
+
+    elif dia == 'qui' or dia == 'quinta':
+            conf = input('Você selecionou ' + Fore.RED + Style.DIM + f'{dia}' + Fore.WHITE + ' deseja confirmar o dia? (S/N): ')
+            if conf == 's' or conf == 'sim':
+                
+                print(Fore.YELLOW + 'CONFIRMANDO DIA...')
+                sleep(2)
+                print('Esses são os horários disponíveis para quinta:\n')
+                print('11:00\n')
+                print('16:00\n')
+                hor = input('Digite o horário que deseja agendar: \n')
+
+    elif dia == 'sex' or dia == 'sexta':
+            conf = input('Você selecionou ' + Fore.RED + Style.DIM + f'{dia}' + Fore.WHITE + ' deseja confirmar o dia? (S/N): ')
+            if conf == 's' or conf == 'sim':
+                
+                print(Fore.YELLOW + 'CONFIRMANDO DIA...')
+                sleep(2)
+                print('Esses são os horários disponíveis para sexta:\n')
+                print('08:00\n')
+                print('12:00\n')
+                hor = input('Digite o horário que deseja agendar: \n')
+    
+    elif dia == 'realizar' or dia == 'r':
+            print('===' * 15)
+            print(Fore.YELLOW + '\nREDIRECIONANDO PARA SESSÃO DE EXAMES PRESENCIAIS...\n' + Fore.WHITE)
+            sleep(2)
+            
+    
+    else:
+            print(Fore.RED + Style.BRIGHT + "[ERRO]" + Style.NORMAL + Fore.WHITE + " Dia não encontrado. Por favor, tente novamente.\n")
+            continue
+
+    while True:
+        
+            print(Fore.WHITE + Style.BRIGHT + "===" * 13)
+            realizar = print('\nEsses são os exames disponíveis:\n')
+            print(Fore.WHITE + Style.BRIGHT + "===" * 13)
+            print(Fore.RED + Style.DIM + "\n1 - Hemograma\n" + Style.RESET_ALL)
+            print(Fore.GREEN + Style.BRIGHT + "2 - Glicemia\n" + Style.RESET_ALL)
+            print(Fore.LIGHTCYAN_EX + Style.BRIGHT + "3 - Colesterol\n" + Style.RESET_ALL)
+            print(Fore.MAGENTA +  Style.BRIGHT + "4 - Triglicerídeos\n" + Style.RESET_ALL)
+            print(Fore.BLUE + Style.BRIGHT + "5 - Urina\n" + Style.RESET_ALL)
+            print("6 - Sair " + Fore.LIGHTRED_EX + Style.BRIGHT + "(X)\n" + Style.RESET_ALL)
+            print(Fore.WHITE + Style.BRIGHT + "===" * 20)
+        
+            senha = random.randint(100, 999)
+            exm = input(Fore.WHITE + "Digite o exame que você deseja realizar(nome ou número):"+ Fore.RED + Style.BRIGHT + " ")
+            print(Fore.WHITE + "===" * 20)
+
+            print(Fore.YELLOW + "\nProcessando sua escolha..." + Fore.WHITE + "\n")
+            sleep(3)#adiciona o tempo de 3 segundos para "processar" a escolha do usuário.
+            senha = random.randint(100, 999)
+
+            if exm == "6":
+                print(Fore.GREEN + "\nObrigado por escolher nossa clínica...\n")
+                sleep(1)
+
+                print(Fore.RED + Style.DIM + "REINICIANDO...\n")
+                sleep(2)
+                continue
+
+            elif exm == "1" or exm.lower() == "hemograma":
+                print(Fore.WHITE + Style.NORMAL + "\n->" + Fore.LIGHTGREEN_EX + f"{nome}" + Fore.WHITE + " você selecionou o exame: " + Fore.RED + Style.DIM + "Hemograma" + Style.RESET_ALL + Fore.WHITE + ".\n" + 
+                    "\n-> Sua senha é " + Fore.YELLOW + Style.BRIGHT + f"{senha}" + Style.RESET_ALL + Fore.WHITE + 
+                    f". Enviaremos a data do agendamento do exame para o email " + Fore.MAGENTA + f"{email}" + Fore.WHITE + " e número " + Fore.LIGHTMAGENTA_EX + f"{nmr}" + Fore.WHITE + ".")
+                print(Fore.GREEN + Style.BRIGHT + '\nObrigado por escolher nossa clínica!\n' + Fore.WHITE)
+                print(Fore.LIGHTRED_EX + 'FINALIZANDO...\n')
+                sleep(2)
+                break
+
+            elif exm == "2" or exm.lower() == "glicemia":
+                print(Fore.WHITE + Style.NORMAL + '-> ' + Fore.LIGHTGREEN_EX + f"{nome}" + Fore.WHITE + ' você selecionou o exame: ' + Fore.GREEN + Style.BRIGHT + 'Glicemia' + Style.RESET_ALL + Fore.WHITE + '.\n' +
+                    f'-> Sua senha é ' + Fore.YELLOW + Style.BRIGHT + f'{senha}' + Style.RESET_ALL + Fore.WHITE + '' + 
+                    f". Enviaremos a data do agendamento do exame para o email "+ Fore.MAGENTA + f"{email}" + Fore.WHITE + " e número " + Fore.LIGHTMAGENTA_EX + f"{nmr}" + Fore.WHITE + ".")
+                print(Fore.GREEN + Style.BRIGHT + '\nObrigado por escolher nossa clínica!\n' + Fore.WHITE)
+                print(Fore.LIGHTRED_EX + 'FINALIZANDO...\n')
+                sleep(2)
+                break
+
+            elif exm == "3" or exm.lower() == "colesterol":
+                print(Fore.WHITE + Style.NORMAL + '-> ' + Fore.LIGHTCYAN_EX + f"{nome}" + Fore.WHITE + ' você selecionou o exame: ' + Fore.LIGHTCYAN_EX + Style.BRIGHT + 'Colesterol' + Style.RESET_ALL + Fore.WHITE + '.\n' +
+                f'-> Sua senha é ' + Fore.YELLOW + Style.BRIGHT + f'{senha}' + Style.RESET_ALL + Fore.WHITE + '' + 
+                f". Enviaremos a data do agendamento do exame para o email "+ Fore.MAGENTA + f"{email}" + Fore.WHITE + " e número " + Fore.LIGHTMAGENTA_EX + f"{nmr}" + Fore.WHITE + ".")
+                print(Fore.GREEN + Style.BRIGHT + '\nObrigado por escolher nossa clínica!\n' + Fore.WHITE)
+                print(Fore.LIGHTRED_EX + 'FINALIZANDO...\n')
+                sleep(2)
+                break
+
+            elif exm == "4" or exm.lower() == "triglicerídeos":
+                print(Fore.WHITE + Style.NORMAL + '-> ' + Fore.MAGENTA + f"{nome}" + Fore.WHITE + ' você selecionou o exame: ' + Fore.MAGENTA + Style.BRIGHT + 'Triglicerídeos' + Style.RESET_ALL + Fore.WHITE + '.\n' +
+                    f'-> Sua senha é ' + Fore.YELLOW + Style.BRIGHT + f'{senha}' + Style.RESET_ALL + Fore.WHITE + '' + 
+                    f". Enviaremos a data do agendamento do exame para o email "+ Fore.MAGENTA + f"{email}" + Fore.WHITE + " e número " + Fore.LIGHTMAGENTA_EX + f"{nmr}" + Fore.WHITE + ".")
+                print(Fore.GREEN + Style.BRIGHT + '\nObrigado por escolher nossa clínica!\n' + Fore.WHITE)
+                print(Fore.LIGHTRED_EX + 'FINALIZANDO...\n')
+                sleep(2)
+                break
+
+            elif exm == "5" or exm.lower() == "urina":
+                print(Fore.WHITE + Style.NORMAL + '-> ' + Fore.BLUE + f"{nome}" + Fore.WHITE + ' você selecionou o exame: ' + Fore.BLUE + Style.BRIGHT + 'Urina' + Style.RESET_ALL + Fore.WHITE + '.\n' +
+                    f'-> Sua senha é ' + Fore.YELLOW + Style.BRIGHT + f'{senha}' + Style.RESET_ALL + Fore.WHITE + '. ' + 
+                    f". Enviaremos a data do agendamento do exame para o email "+ Fore.MAGENTA + f"{email}" + Fore.WHITE + " e número " + Fore.LIGHTMAGENTA_EX + f"{nmr}" + Fore.WHITE + ".")
+                print(Fore.GREEN + Style.BRIGHT + '\nObrigado por escolher nossa clínica!\n' + Fore.WHITE)
+                print(Fore.LIGHTRED_EX + 'FINALIZANDO...\n')
+                sleep(2)
+                break
+
+            else:
+                print(Fore.LIGHTRED_EX + Style.BRIGHT + "[ERRO]Exame não encontrado."  + Style.RESET_ALL + Fore.WHITE + " Por favor, tente novamente.\n")
