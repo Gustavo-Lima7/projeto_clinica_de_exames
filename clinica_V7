@@ -1,0 +1,149 @@
+import random
+import json
+import smtplib
+from time import sleep
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# --- CONFIGURAÇÃO DE ENVIO ---
+MEU_EMAIL = "noreply1322@gmail.com"
+MINHA_SENHA = "vvzalhtkknwwbbam" # 16 dígitos sem espaços
+
+def enviar_email_clinica(destinatario, assunto, mensagem_corpo):
+    """Função robusta para envio de e-mail via Gmail."""
+    msg = MIMEMultipart()
+    msg['From'] = MEU_EMAIL
+    msg['To'] = destinatario
+    msg['Subject'] = assunto
+    msg.attach(MIMEText(mensagem_corpo, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls() 
+        server.login(MEU_EMAIL, MINHA_SENHA)
+        server.send_message(msg)
+        server.quit()
+        return True
+    except Exception as e:
+        print(f"\n[AVISO] O e-mail não pôde ser enviado: {e}")
+        return False
+
+def salvar_dados(dados):
+    """Salva a ficha no arquivo JSON."""
+    try:
+        with open("fichas.json", "r", encoding="utf-8") as arquivo:
+            lista = json.load(arquivo)
+    except (FileNotFoundError, json.JSONDecodeError):
+        lista = []
+    lista.append(dados)
+    with open("fichas.json", "w", encoding="utf-8") as arquivo:
+        json.dump(lista, arquivo, indent=4, ensure_ascii=False)
+
+# --- INÍCIO DO SISTEMA ---
+print('\n' + '===' * 13)
+print('SEJA BEM VINDO(A) CLÍNICA DE EXAMES!')
+print('===' * 13)
+
+print('\nINICIANDO SISTEMA...\n')
+sleep(3)
+
+print('Olá! Vamos começar com seu cadastro.')
+nome = input('Nome: ').strip().title()
+
+# Validação de Email
+while True:
+    email = input('E-mail: ').strip().lower()
+    if "@" in email and "." in email:
+        break
+    print("[ERRO] Formato de e-mail inválido.")
+
+print('\nProcessando cadastro...\n')
+sleep(1)
+
+print('==' * 10)
+print('Cadastro realizado')
+print('==' * 10)
+
+print('\n[A] Agendar exame\n[R] Realizar exame agora')
+opcao = input('\nEscolha uma opção: ').strip().lower()
+
+# --- Fluxo para parte de agendamento ---
+if opcao in ['a', 'agendar']:
+    confirmado = False
+    while True:
+
+        print("\nDias disponíveis: 10/05, 12/05, 14/05, 19/05, 25/05")
+        dia = input("\nEscolha o dia: ").strip()
+        horarios = {
+            "10": "13:00 e 17:00", "12": "13:00 e 17:00",
+            "14": "09:00 e 15:00", "19": "09:00 e 15:00",
+            "25": "11:00 e 16:00"
+        }
+
+        sala = random.choice(['Consultório 1', 'Consultório 2', 'Consultório 3'])
+
+        if dia in horarios:
+            while True:
+                hor = input(f"Horários para o dia {dia.capitalize()}: ({horarios[dia]}): ")
+                if hor in horarios[dia]:
+                    print("\n" + "="*35)
+                    print(f"AGENDAMENTO CONFIRMADO: {dia.capitalize()} às {hor}")
+                    print("="*35)
+                    
+                    corpo = f"Prezado(a) {nome},\n"
+                    corpo += f"\nInformamos que seu agendamento de exame foi confirmado com sucesso."
+                    corpo += f"\n\nData: {dia.capitalize()}/05/2026\nHorário: {hor}"
+                    corpo += "\n\nSolicitamos que compareça com 15 minutos de antecedência para o atendimento, portando documento com foto, cartão do convênio (se houver) e os resultados de exames anteriores, caso possua."
+                    corpo += "\n\nAgradecemos pela preferência e estamos à disposição para quaisquer dúvidas ou necessidades adicionais."
+                    corpo += "\n\nAtenciosamente,\nClínica de Exames"
+                    enviar_email_clinica(email, "Confirmação de Agendamento", corpo)
+                    
+                    
+                    # Salva no JSON
+                    salvar_dados({'paciente': nome, 'email': email, 'servico': 'Agendamento', 'dia': dia, 'hora': hor})
+                    
+                    confirmado = True
+                    break 
+                else:
+                    print("\n[ERRO] Horário inválido!")
+            if confirmado: break
+        else:
+            print("\n[ERRO] Dia não disponível!")
+
+# --- Fluxo para parte de realização ---
+elif opcao in ['r', 'realizar']:
+    print('\n[1] Hemograma [2] Glicemia [3] Colesterol [4] Triglicerídeos [5] Urina')
+    exames_nomes = {
+        '1': 'Hemograma', 'hemograma': 'Hemograma',
+        '2': 'Glicemia', 'glicemia': 'Glicemia',
+        '3': 'Colesterol', 'colesterol': 'Colesterol',
+        '4': 'Triglicerídeos', 'triglicerídeos': 'Triglicerídeos',
+        '5': 'Urina', 'urina': 'Urina'
+    }
+
+    while True:
+        escolha = input('\nDigite o nome ou número do exame: ').strip().lower()
+        if escolha in exames_nomes:
+            exame_final = exames_nomes[escolha]
+            senha = random.randint(100, 999)
+            sala = random.choice(['Consultório 1', 'Consultório 2', 'Consultório 3'])
+
+            print('\nGerando sua ficha...\n')
+            sleep(2)
+            
+            print("-" * 35)
+            print(f"PACIENTE: {nome}\nEXAME: {exame_final}\nSENHA: {senha}\nLOCAL: {sala}")
+            print("-" * 35)
+            
+            corpo = f"Prezado(a) {nome},\n\n"
+            corpo += f"Informamos que sua ficha de atendimento para o exame '{exame_final}' foi gerada com sucesso.\n\n"
+            corpo += "-" * 35
+            corpo += f"\nPACIENTE: {nome}\nEXAME: {exame_final}\nSENHA: {senha}\nLOCAL: {sala}\n"
+            corpo += "-" * 35 + "\n\n"
+            corpo += "Aguarde na sala de espera até que o número de sua senha seja chamado.\n\nAgradecemos pela preferência e estamos à disposição para quaisquer dúvidas ou necessidades adicionais.\n\nAtenciosamente,\nClínica de Exames"
+            enviar_email_clinica(email, "Ficha de Atendimento Gerada", corpo)
+
+            salvar_dados({'paciente': nome, 'email': email, 'exame': exame_final, 'senha': senha, 'local': sala})
+            break
+        else:
+            print('[ERRO] Exame não reconhecido.')
