@@ -24,5 +24,5 @@ git clone https://github.com/Gustavo-Lima7/projeto_clinica_de_exame_de_sangue.gi
 2. Acesse a pasta do projeto:
 cd projeto_clinica_de_exame_de_sangue
 
-3. Execute o arquivo
+3.. Execute o arquivo
 python teste_projeto.py
